@@ -1,0 +1,131 @@
+@charset "UTF-8";
+:root{
+	--navbar-bg-color : #088F8F;
+	--navbar-bg-color-hover : #066a6a;
+	--delete-btn-color: #dc3545;
+	--delete-btn-color-hover: #cd2334;
+}
+
+.bgcolor{
+	background-color:  var(--navbar-bg-color);
+}
+
+.bgcolor:hover{
+	background-color:  var(--navbar-bg-color);
+}
+.cardtitle{
+	font-size: 12pt;
+	font-weight: normal;
+}
+.cardprice{
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.margintop{
+	margin-top: 35px;
+}
+
+.mycard{
+	margin: 35px 0px  0px 25px;
+}
+
+/* button */
+
+.buttons{
+	text-align: center;
+	margin-top: 15px;
+}
+
+.button{
+	background-color: var(--navbar-bg-color);
+	padding: 10px;
+	border-radius: 5px;
+	text-decoration: none;
+	border: none;
+	
+}
+
+.submitpadding{
+	padding: 9px;
+}
+
+.button:hover{
+	background-color: var(--navbar-bg-color-hover);
+}
+
+/* Delete button */
+
+.deletebtn{
+	text-align: center;
+	background-color: var(--delete-btn-color);
+	color: white;
+	padding: 10px;
+	border-radius: 5px;
+	text-decoration: none;
+	border: none;
+}
+
+.deletebtn:hover{
+	background-color: var(--delete-btn-color-hover);
+}
+
+/* Table */
+
+.mytable{
+	width: 95%;
+	margin: auto;
+}
+
+
+/* popup */
+
+.popup{
+	position: fixed;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+	width: 500px;
+	height: 250px;
+	background-color: white;
+	color: var(--navbar-bg-color);
+	border-radius: 5px;
+	z-index: 5;
+}
+
+.close_btn{
+	text-align: right;
+	margin-top: 1%;
+	margin-right: 2%;
+	cursor: pointer;
+}
+.close_btn:hover{
+	color: var(--navbar-bg-color-hover);
+}
+
+.sucess_icon{
+	width: 75px;
+	margin-top: 5%;
+	margin-left: 42%;
+}
+
+.message{
+	font-size: 12pt;
+	text-align: center;
+}
+
+.blur{
+	position: fixed; 
+    width: 100%; 
+    height: 100%; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0, .6);
+    z-index: 3;
+}
+
+#none{
+	display: block;
+}
