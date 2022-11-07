@@ -1,5 +1,5 @@
-<%@page import="jakarta.ws.rs.core.MediaType"%>
 <%@page import="jakarta.ws.rs.core.GenericType"%>
+<%@page import="jakarta.ws.rs.core.MediaType"%>
 <%@page import="jakarta.ws.rs.client.ClientBuilder"%>
 <%@page import="jakarta.ws.rs.client.Client"%>
 <%@page
@@ -29,28 +29,31 @@
 	List<Product> products = client.target("http://localhost:8080/cartrest/webapi/products")
 				.request(MediaType.APPLICATION_JSON)
 				.get(new GenericType<List<Product>>() { });
-
 	
 	boolean success = Boolean.TRUE == session.getAttribute("success");
 	session.removeAttribute("success");
+	
+	boolean billGenerated = Boolean.TRUE == session.getAttribute("billSuccess");
+	session.removeAttribute("billSuccess");
 
 	if (success) {
 		success = false;
 	%>
-		<div id="none">
-			<div class="popup">
-				<p class="close_btn">X</P>
-				<img alt="sucess" src="./static/images/icons/success.png"
-					class="sucess_icon">
-				<h4 class="message"><%=session.getAttribute("pname")%>
-					Successfully Added to Cart
-				</h4>
-			</div>
-			<div class="blur"></div>
-		</div>
+		<jsp:include page="alert.jsp"></jsp:include>
 	<%
+	session.removeAttribute("message");
 	}
+	
+	if(billGenerated){
+		billGenerated = false;
 	%>
+		<jsp:include page="alert.jsp"></jsp:include>
+	<%
+	session.removeAttribute("message");
+	} 
+	%>
+	
+	
 
 	<div class="container">
 		<div class="row">
@@ -68,8 +71,7 @@
 								<%=product.getProductName()%>
 								| <span class="cardprice"><%=product.getPrice()%></span>
 							</h5>
-								<input type="hidden" name="pname" value="<%=product.getProductName()%>"> 
-								<input type="hidden" name="price" value="<%=product.getPrice()%>"> 
+								<input type="hidden" name="pid" value="<%=product.getPid()%>"> 
 								<input type="submit"
 								class="submitpadding button text-white" value="Add to Cart" />
 

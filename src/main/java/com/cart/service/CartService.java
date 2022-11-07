@@ -20,4 +20,8 @@ public class CartService {
 	public List<Item> getItems(){
 		return items;
 	}
+	
+	public void removeAll() {
+		items.clear();
+	}
 }
