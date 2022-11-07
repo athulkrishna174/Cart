@@ -1,4 +1,7 @@
-<%@page import="com.cart.service.GetProducts"%>
+<%@page import="jakarta.ws.rs.core.MediaType"%>
+<%@page import="jakarta.ws.rs.core.GenericType"%>
+<%@page import="jakarta.ws.rs.client.ClientBuilder"%>
+<%@page import="jakarta.ws.rs.client.Client"%>
 <%@page
 	import="jakarta.security.auth.message.callback.PrivateKeyCallback.IssuerSerialNumRequest"%>
 <%@page import="com.cart.model.Product"%>
@@ -22,8 +25,11 @@
 	<jsp:include page="navbar.jsp" />
 	
 	<%
-	GetProducts getProducts = new GetProducts();
-	List<Product> products = getProducts.getProducts();
+	Client client = ClientBuilder.newClient();
+	List<Product> products = client.target("http://localhost:8080/cartrest/webapi/products")
+				.request(MediaType.APPLICATION_JSON)
+				.get(new GenericType<List<Product>>() { });
+
 	
 	boolean success = Boolean.TRUE == session.getAttribute("success");
 	session.removeAttribute("success");
