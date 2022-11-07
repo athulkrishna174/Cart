@@ -1,11 +1,20 @@
 package com.cart.model;
 
 public class Product {
+	int pid;
 	String productName;
     String price;
     String imageUri;
 
-    public String getProductName() {
+    public int getPid() {
+		return pid;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+
+	public String getProductName() {
         return productName;
     }
 

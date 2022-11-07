@@ -24,8 +24,9 @@
 	int grandTotal = 0;
 	int count = 1;
 	%>
-
-	<table class="table mytable">
+	
+	<table class="table mytable" >
+	<caption></caption>
 		<thead>
 			<tr>
 				<th scope="col">No.</th>
@@ -67,5 +68,15 @@
 		</tr>
 		</tbody>
 	</table>
+	
+	<%if(!items.isEmpty()){%>		
+		<button class="button orderBtn text-white">Place Order</button>	
+	<% }%>	
+	
+	<jsp:include page="orderForm.jsp">
+		<jsp:param name="grandTotal" value="<%=grandTotal %>"/>
+	</jsp:include>
+	
+	<script type="text/javascript" src="./static/js/popupForm.js"></script>
 </body>
 </html>
