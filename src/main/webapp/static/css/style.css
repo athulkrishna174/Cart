@@ -165,3 +165,27 @@
 	border: 1px solid var(--navbar-bg-color);
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--box-shadow);
 }
+
+
+/* Link */
+
+.link{
+	color: var(--navbar-bg-color);
+
+}
+
+.link:hover{
+	color: var(--navbar-bg-color-hover);
+}
+
+.mycontainer{
+	margin-top: 175px;
+}
+
+.form-label{
+	font-size: 10pt;
+}
+
+.borderRed{
+	border: 1px solid red;
+}

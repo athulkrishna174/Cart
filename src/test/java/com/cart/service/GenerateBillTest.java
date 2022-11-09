@@ -28,10 +28,6 @@ class GenerateBillTest {
 		item3.setPrice(2000);
 		item3.setQuantity(1);
 		
-		CartService cartService = new CartService();
-		cartService.setItem(item1);
-		cartService.setItem(item2);
-		cartService.setItem(item3);
 	}
 
 	@Test
