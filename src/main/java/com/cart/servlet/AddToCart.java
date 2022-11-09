@@ -1,7 +1,6 @@
 package com.cart.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import com.cart.model.Item;
 import com.cart.model.Product;
@@ -44,15 +43,13 @@ public class AddToCart extends HttpServlet {
 
 		User user = (User) session.getAttribute("user");
 
-		try {
-			cartService.inserItem(user.getId(), item);
+		cartService.inserItem(user.getId(), item);
 
-			session.setAttribute("message", item.getName() + "Successfully Added to Cart");
-			session.setAttribute("success", true);
+		session.setAttribute("message", item.getName() + "Successfully Added to Cart");
+		session.setAttribute("success", true);
 
-			response.sendRedirect("home.jsp");
-		} catch (SQLException e) {
-		}
+		response.sendRedirect("home.jsp");
+		
 	}
 
 }

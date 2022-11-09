@@ -26,7 +26,7 @@ public class RemoveItem extends HttpServlet{
 		
 		CartService cartService = new CartService();
 		
-		cartService.deleteItem(user.getId(), Integer.parseInt(request.getParameter("item")));
+		cartService.deleteItem(user.getId(), request.getParameter("item"));
 		
 		response.sendRedirect("cart.jsp");
 	}

@@ -27,7 +27,7 @@ public class PlaceOrder extends HttpServlet {
 		
 		user.setName(request.getParameter("name"));
 		user.setPhone(request.getParameter("phone"));	
-		user.setEmail(request.getParameter("email"));
+		user.setEmail(user.getEmail());
 		user.setAddress(request.getParameter("address")); 	
 		user.setCardNo(request.getParameter("card"));
 		
