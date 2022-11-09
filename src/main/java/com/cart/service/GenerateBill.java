@@ -2,6 +2,7 @@ package com.cart.service;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -35,10 +36,10 @@ public class GenerateBill {
 	private static final Font TOTAL_AMOUNT_FONT = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8, BaseColor.DARK_GRAY);
 
 	
-	public void generateBill(User user)throws FileNotFoundException, DocumentException {
+	public void generateBill(User user)throws FileNotFoundException, DocumentException, SQLException {
 		
 		CartService cartService = new CartService();
-		List<Item> items = cartService.getItems();
+		List<Item> items = cartService.getItems(user.getId());
 		
 		Document document = new Document();
 		PdfWriter.getInstance(document, new FileOutputStream(PATH));
@@ -56,7 +57,8 @@ public class GenerateBill {
 		
 		setTotalAmount(document, items);
 		
-		cartService.removeAll();
+		cartService.updateMyOrder(user.getId());
+		cartService.deleteAllItems(user.getId());
 		
 		document.close();
 	}

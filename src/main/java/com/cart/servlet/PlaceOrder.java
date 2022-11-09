@@ -20,7 +20,10 @@ public class PlaceOrder extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		User user = new User();
+		HttpSession session = request.getSession();
+		
+		
+		User user = (User)session.getAttribute("user");
 		
 		user.setName(request.getParameter("name"));
 		user.setPhone(request.getParameter("phone"));	
@@ -34,8 +37,6 @@ public class PlaceOrder extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		HttpSession session = request.getSession();
 		
 		session.setAttribute("message", "Order Placed and Bill Gereated");
 		session.setAttribute("billSuccess", true);
