@@ -1,3 +1,4 @@
+<%@page import="com.cart.model.User"%>
 <%@page import="com.cart.service.CartService"%>
 <%@page import="com.cart.model.Item"%>
 <%@page import="java.util.List"%>
@@ -18,8 +19,17 @@
 <body>
 	<jsp:include page="navbar.jsp" />
 	<%
-	CartService cartService = new CartService();
-	List<Item> items = cartService.getItems();
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	
+	if(session.getAttribute("user")==null){
+		response.sendRedirect("login.jsp");
+	}
+	
+	try{
+		User user = (User) session.getAttribute("user");
+	
+		CartService cartService = new CartService();
+		List<Item> items = cartService.getItems(user.getId());
 	
 	int grandTotal = 0;
 	int count = 1;
@@ -48,7 +58,7 @@
 				<td><%=item.getTotal() %></td>
 				<td>
 					<form action="removeItem" method="get">
-						<input type="hidden" name="item" value="<%=items.indexOf(item)%>">
+						<input type="hidden" name="item" value="<%=item.getId()%>">
 						<input type="submit" class="deletebtn" value="Remove"/>
 					</form>
 				</td>
@@ -76,7 +86,9 @@
 	<jsp:include page="orderForm.jsp">
 		<jsp:param name="grandTotal" value="<%=grandTotal %>"/>
 	</jsp:include>
-	
+	<%
+	}catch(Exception e){}	
+	%>
 	<script type="text/javascript" src="./static/js/popupForm.js"></script>
 </body>
 </html>

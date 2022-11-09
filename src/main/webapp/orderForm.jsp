@@ -1,3 +1,4 @@
+<%@page import="com.cart.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,6 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%
+		try{
+			User user = (User)session.getAttribute("user");
+		
+	%>
+
 	<div id="none">
 		<div class="orderPopup">
 			<p class="close_btn">X</P>
@@ -16,7 +23,7 @@
 				<div class="mb-3 row">
 				    <label class="col-sm-2 col-form-label">Full Name</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control myInput" name="name" placeholder="Full Name" required="required">
+				      <input type="text" class="form-control myInput" name="name" placeholder="Full Name" required="required" value="<%=user.getName()%>">
 				    </div>
 				</div>
 				
@@ -30,7 +37,7 @@
 				<div class="mb-3 row">
 				    <label class="col-sm-2 col-form-label">Email</label>
 				    <div class="col-sm-10">
-				      <input type="email" class="form-control myInput" name="email" placeholder="Email Address" required="required">
+				      <input type="email" class="form-control myInput" name="email" placeholder="Email Address" value="<%=user.getEmail() %>" disabled readonly="readonly">
 				    </div>
 				</div>
 				
@@ -60,6 +67,12 @@
 		</div>
 		<div class="blur"></div>
 	</div>
+	
+	<% 
+		}catch(Exception e){
+			response.sendRedirect("login.jsp");
+		}
+	%>
 	
 </body>
 </html>

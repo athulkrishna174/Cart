@@ -25,10 +25,17 @@
 	<jsp:include page="navbar.jsp" />
 	
 	<%
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	
+	if(session.getAttribute("user")==null){
+		response.sendRedirect("login.jsp");
+	}
+	
 	Client client = ClientBuilder.newClient();
 	List<Product> products = client.target("http://localhost:8080/cartrest/webapi/products")
 				.request(MediaType.APPLICATION_JSON)
 				.get(new GenericType<List<Product>>() { });
+	
 	
 	boolean success = Boolean.TRUE == session.getAttribute("success");
 	session.removeAttribute("success");
