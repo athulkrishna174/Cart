@@ -6,6 +6,7 @@ import com.cart.model.Item;
 import com.cart.model.Product;
 import com.cart.model.User;
 import com.cart.service.CartService;
+import com.cart.service.ProductService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,9 +14,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.core.MediaType;
 
 @WebServlet("/addCart")
 public class AddToCart extends HttpServlet {
@@ -28,9 +26,8 @@ public class AddToCart extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		Client client = ClientBuilder.newClient();
-		Product product = client.target("http://localhost:8080/cartrest/webapi/products")
-				.path(request.getParameter("pid")).request(MediaType.APPLICATION_JSON).get(Product.class);
+		ProductService productService = new ProductService();
+		Product product = productService.getProduct(request.getParameter("pid"));
 
 		Item item = new Item();
 

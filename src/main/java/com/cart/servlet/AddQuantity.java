@@ -2,6 +2,7 @@ package com.cart.servlet;
 
 import java.io.IOException;
 
+import com.cart.model.Item;
 import com.cart.model.User;
 import com.cart.service.CartService;
 
@@ -12,8 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/removeItem")
-public class RemoveItem extends HttpServlet{
+@WebServlet("/addQuantity")
+public class AddQuantity extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,13 +22,18 @@ public class RemoveItem extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		
+				
 		User user = (User)session.getAttribute("user");
 		
 		CartService cartService = new CartService();
 		
-		cartService.deleteItem(user.getId(), Integer.parseInt(request.getParameter("id")));
+		Item item = cartService.getItem(user.getId(), Integer.parseInt(request.getParameter("item")));
+		
+		item.setQuantity(item.getQuantity() + 1);
+		
+		cartService.updateQuantity(user.getId(), item.getId(), item);
 		
 		response.sendRedirect("cart.jsp");
 	}
+
 }

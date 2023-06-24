@@ -1,7 +1,4 @@
-<%@page import="jakarta.ws.rs.core.GenericType"%>
-<%@page import="jakarta.ws.rs.core.MediaType"%>
-<%@page import="jakarta.ws.rs.client.ClientBuilder"%>
-<%@page import="jakarta.ws.rs.client.Client"%>
+<%@page import="com.cart.service.ProductService"%>
 <%@page
 	import="jakarta.security.auth.message.callback.PrivateKeyCallback.IssuerSerialNumRequest"%>
 <%@page import="com.cart.model.Product"%>
@@ -31,11 +28,9 @@
 		response.sendRedirect("login.jsp");
 	}
 	
-	Client client = ClientBuilder.newClient();
-	List<Product> products = client.target("http://localhost:8080/cartrest/webapi/products")
-				.request(MediaType.APPLICATION_JSON)
-				.get(new GenericType<List<Product>>() { });
-	
+	ProductService productService = new ProductService();
+		
+	List<Product> products = productService.getAllProducts();
 	
 	boolean success = Boolean.TRUE == session.getAttribute("success");
 	session.removeAttribute("success");

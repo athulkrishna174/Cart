@@ -189,3 +189,30 @@
 .borderRed{
 	border: 1px solid red;
 }
+
+/* Quantity Select */
+
+.qtyMinus{
+	border-radius: 5px 0 0 5px;
+}
+
+.qtyMinus:hover{
+	color: white;
+	background-color: var(--delete-btn-color);
+}
+
+.qtyPlus{
+	border-radius: 0 5px 5px 0px;
+}
+
+.qtyPlus:hover{
+	color: white;
+	background-color: var(--navbar-bg-color);
+}
+
+.qtyBtn{
+	font-weight: bolder;
+}
+.qtyWidth{
+	width: 110px;
+}

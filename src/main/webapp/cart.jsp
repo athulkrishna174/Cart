@@ -43,7 +43,7 @@
 				<th scope="col">Item</th>
 				<th scope="col">Price</th>
 				<th scope="col">Quantity</th>
-				<th scope="col">Total</th>	
+				<th scope="col" style="width: 150px;">Total</th>	
 				<th scope="col">Delete</th>	
 			</tr>
 		</thead>
@@ -51,28 +51,41 @@
 		<% for (Item item : items) {
 		%>
 			<tr>
-				<th scope="row"><%=count %></th>
+				<th scope="row"><%=count++ %></th>
 				<td><%=item.getName() %></td>
 				<td><%=item.getPrice() %></td>
-				<td><%=item.getQuantity() %></td>
+				<td>
+					<div class="d-flex justify-content-center qtyWidth">
+						<div>
+							<div class="input-group">
+								<form action="removeQuantity" method="get">
+									<input type="hidden" name="item" value="<%=item.getId()%>">
+									<input type="submit" class="input-group-text qtyBtn qtyMinus" value="-"/>
+								</form>
+								<p class="form-control text-center"> <%=item.getQuantity()%></p>
+								<form action="addQuantity" method="get">
+									<input type="hidden" name="item" value="<%=item.getId()%>">
+									<input type="submit" class="input-group-text qtyBtn qtyPlus" value="+"/>
+								</form>
+							</div>
+						</div>
+					</div>				
+				</td>
 				<td><%=item.getTotal() %></td>
 				<td>
 					<form action="removeItem" method="get">
-						<input type="hidden" name="item" value="<%=item.getId()%>">
+						<input type="hidden" name="id" value="<%=item.getId()%>">
 						<input type="submit" class="deletebtn" value="Remove"/>
 					</form>
 				</td>
-				<%
-				count++;
-				grandTotal += item.getTotal(); 
-				%>
+				<% grandTotal += item.getTotal(); %>
 			</tr>
 		<%} %>
 		<tr>
 			<td></td>
 			<td></td>
 			<td></td>
-			<th>Grand Total:</th>
+			<th scope="row">Grand Total:</th>
 			<td><%=grandTotal %></td>
 			<td></td>
 		</tr>

@@ -24,6 +24,16 @@ public class CartService {
 		}
 	}
 	
+	public Item getItem(int userId, int id){
+		
+		try (Client client = ClientBuilder.newClient()) {
+			return client.target(PATH)
+						.path(String.valueOf(userId))
+						.path(String.valueOf(id))
+						.request(MediaType.APPLICATION_JSON)
+						.get(Item.class);
+		}
+	}
 	
 	public void inserItem(int userId, Item item){
 		try (Client client = ClientBuilder.newClient()) {
@@ -36,11 +46,11 @@ public class CartService {
         
 	}
 	
-	public void deleteItem(int userId, String item){
+	public void deleteItem(int userId, int id){
 		try (Client client = ClientBuilder.newClient()) {
 			client.target(PATH)
 						.path(String.valueOf(userId))
-						.path(item)
+						.path(String.valueOf(id))
 						.request(MediaType.APPLICATION_JSON)
 						.delete();
 		}
@@ -66,6 +76,16 @@ public class CartService {
 						.path(String.valueOf(userId))
 						.request(MediaType.APPLICATION_JSON)
 						.put(Entity.entity(items, MediaType.APPLICATION_JSON));
+		}
+	}
+	
+	public void updateQuantity(int userId, int id, Item item) {
+		try (Client client = ClientBuilder.newClient()) {
+			client.target(PATH)
+						.path(String.valueOf(userId))
+						.path(String.valueOf(id))
+						.request(MediaType.APPLICATION_JSON)
+						.put(Entity.entity(item, MediaType.APPLICATION_JSON));
 		}
 	}
 }
